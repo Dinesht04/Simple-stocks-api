@@ -100,3 +100,14 @@ func RemoveStock(db *xorm.Engine) gin.HandlerFunc {
 
 	}
 }
+
+func ListStocks(db *xorm.Engine) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var Stocks []model.Stock
+		err := db.Find(&Stocks)
+		Check(err)
+		ctx.JSON(http.StatusOK, gin.H{
+			"payload": Stocks,
+		})
+	}
+}

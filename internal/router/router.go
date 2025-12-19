@@ -8,17 +8,13 @@ import (
 	"xorm.io/xorm"
 )
 
-func DBMiddleware(db *xorm.Engine) gin.HandlerFunc {
-	return func(ctx *gin.Context) {
-		ctx.Set("db", db)
-		ctx.Next()
-	}
+func RateLimitingMiddleWare() {
+
 }
 
 func CreateRouter(db *xorm.Engine) *gin.Engine {
 
 	router := gin.Default()
-	router.Use(DBMiddleware(db))
 
 	router.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
@@ -26,8 +22,9 @@ func CreateRouter(db *xorm.Engine) *gin.Engine {
 		})
 	})
 
-	router.GET("/add", middleware.InsertStock(db))
-	router.GET("/sell", middleware.RemoveStock(db))
+	router.POST("/add", middleware.InsertStock(db))
+	router.POST("/sell", middleware.RemoveStock(db))
+	router.GET("/", middleware.ListStocks(db))
 
 	return router
 }
