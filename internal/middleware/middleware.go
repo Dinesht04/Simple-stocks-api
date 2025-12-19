@@ -6,6 +6,6 @@ import (
 
 func Check(err error) {
 	if err != nil {
-		log.Fatal("error %w", err)
+		log.Fatal("error: ", err)
 	}
 }

@@ -27,6 +27,7 @@ func CreateRouter(db *xorm.Engine) *gin.Engine {
 	})
 
 	router.GET("/add", middleware.InsertStock(db))
+	router.GET("/sell", middleware.RemoveStock(db))
 
 	return router
 }

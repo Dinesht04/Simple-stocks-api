@@ -1,7 +1,7 @@
 package model
 
 type Stock struct {
-	UUID     string `json:"uuid"`
+	UUID     string `json:"id"`
 	StockId  string `json:"stock_id" validate:"required"`
 	Name     string `json:"string" validate:"required"`
 	Price    int64  `json:"price" validate:"required"`
